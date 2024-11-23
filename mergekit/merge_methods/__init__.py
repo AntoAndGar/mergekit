@@ -24,6 +24,7 @@ from mergekit.merge_methods.model_stock import ModelStockMerge
 from mergekit.merge_methods.passthrough import PassthroughMerge
 from mergekit.merge_methods.slerp import SlerpMerge
 from mergekit.merge_methods.tokenizer_permute import TokenizerPermutationMerge
+from mergekit.merge_methods.task_singular_vectors import TSVMerge
 
 
 def get(method: str) -> MergeMethod:
@@ -93,6 +94,11 @@ def get(method: str) -> MergeMethod:
             default_normalize=False,
             default_rescale=True,
         )
+    elif method == "task_singular_vectors":
+        return TSVMerge(
+            default_normalize=False,
+            default_rescale=False,
+        )
     raise RuntimeError(f"Unimplemented merge method {method}")
 
 
@@ -104,4 +110,5 @@ __all__ = [
     "PassthroughMerge",
     "GeneralizedTaskArithmeticMerge",
     "TokenizerPermutationMerge",
+    "TSVMerge",
 ]

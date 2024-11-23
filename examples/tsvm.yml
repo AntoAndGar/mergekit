@@ -1,0 +1,14 @@
+models:
+  - model: allenai/tulu-2-dpo-7b
+    parameters:
+      weight: 1.0
+  # - model: EleutherAI/llemma_7b
+  #   parameters:
+  #     weight: 1.0
+merge_method: task_singular_vectors
+base_model: meta-llama/Llama-2-7b-chat-hf
+parameters:
+  probabilistic: False # use probabilistic SVD algorithm (maybe fastest but little inaccurate) instead of the non probabilistic SVD algorithm (slowest but accurate)
+  sv_reduction: 1.0 # strict value: "1.0 / number of task vector" or less (never more), if number of task vector is >=2 (percentage of singular components to keep for each TV)
+  num_iterations: 4 # number of iterations for the probabilistic SVD algorithm (2 is a good start and fastest option but could be inaccurate, 32 is the most accurate but slowest option. I don't recommend going above 32 use SVD probabilistic at False instead)
+dtype: float16
